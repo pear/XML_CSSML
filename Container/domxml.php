@@ -44,11 +44,11 @@
 class XML_CSSML_domxml extends XML_CSSML {
     // {{{ constructor
 
-    function XML_CSSML_domxml($in_CSSML = null, $in_params = null)
+    function XML_CSSML_domxml($in_CSSML = null, $in_type = 'string', $in_params = null)
     {
         $this->loaded = false;
         if (!is_null($in_CSSML)) {
-            $this->load($in_CSSML);
+            $this->load($in_CSSML, $in_type);
         }
 
         if (!is_null($in_params)) {
@@ -84,30 +84,28 @@ class XML_CSSML_domxml extends XML_CSSML {
             $output = $resultData->get_content();
         }
         
-        parent::_free();
-
         return isset($output) ? $output : true;
     }
 
     // }}}
     // {{{ load()
 
-    function load($in_CSSML)
+    function load($in_CSSML, $in_type = 'string')
     {
         if (parent::isError($load = parent::load())) {
             return $load;
         }
 
         // If the CSSML data is already a DOM object (can tell by checking for root)
-        if (get_class($in_CSSML) == 'DomDocument') {
+        if ($in_type == 'object' && get_class($in_CSSML) == 'DomDocument') {
             $this->CSSMLDoc = $in_CSSML;
         }
         // If this is a data file, then make it an DOM object with the file function
-        elseif (file_exists($in_CSSML)) {
+        elseif ($in_type == 'file' && @file_exists($in_CSSML)) {
             $this->CSSMLDoc = domxml_open_file($in_CSSML);
         }
         // If we were given a string, then make it a DOM object with the string function
-        elseif (is_string($in_CSSML)) {
+        elseif ($in_type == 'string' && is_string($in_CSSML)) {
             $this->CSSMLDoc = domxml_open_mem($in_CSSML);
         }
         // We need to die here because we have no data or it cannot be xml
@@ -115,7 +113,7 @@ class XML_CSSML_domxml extends XML_CSSML {
             return PEAR::raiseError(null, XML_CSSML_INVALID_DATA, null, E_USER_WARNING, "Request data: $in_CSSML", 'XML_CSSML_Error', true);
         }
 
-        if (!is_object($this->CSSMLDoc) || get_class($this->CSSMLDoc) != 'DomDocument') {
+        if (get_class($this->CSSMLDoc) != 'DomDocument') {
             return PEAR::raiseError(null, XML_CSSML_INVALID_DOCUMENT, null, E_USER_WARNING, "Request data: $in_CSSML", 'XML_CSSML_Error', true);
         }
 

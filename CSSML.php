@@ -124,22 +124,22 @@ class XML_CSSML {
      * @return void
      * @access private
      */
-    function XML_CSSML($in_driver, $in_CSSML = null, $in_params = null)
+    function XML_CSSML($in_driver, $in_CSSML = null, $in_type = 'string', $in_params = null)
     {
-        $this = $this->factory($in_driver, $in_CSSML, $in_params);
+        $this = $this->factory($in_driver, $in_CSSML, $in_type, $in_params);
     }
         
     // }}}
     // {{{ factory()
 
-    function &factory($in_driver, $in_CSSML = null, $in_params = null)
+    function &factory($in_driver, $in_CSSML = null, $in_type = 'string', $in_params = null)
     {
         $interface_path = 'Container/' . $in_driver . '.php';
         $interface_class = 'XML_CSSML_' . $in_driver;
         
         @include_once $interface_path;
         
-        return new $interface_class($in_CSSML, $in_params);
+        return new $interface_class($in_CSSML, $in_type, $in_params);
     }
 
     // }}}
@@ -195,8 +195,8 @@ class XML_CSSML {
         if (isset($in_params['output'])) {
             $this->output = $in_params['output'];
             if ($in_params['output'] != 'STDOUT') {
-                // check to make sure this is a file
-                if (!touch($in_params['output'])) {
+                // check to make sure this is a file...this needs work
+                if (!@file_exists($in_params['output']) && !touch($in_params['output'])) {
                     $this->output = 'STDOUT';
                     return PEAR::raiseError(null, XML_CSSML_INVALID_FILE, PEAR_ERROR_PRINT, E_USER_NOTICE, '', 'XML_CSSML_Error', true);
                 }
@@ -293,16 +293,16 @@ class XML_CSSML {
     }
 
     // }}}
-    // {{{ _free()
+    // {{{ free()
 
     /**
      * Kill the class object to free memory.  Not really sure how necessary this is, but xml
      * documents can be pretty big.  This will kill everything, so only use it when you are done
      *
-     * @access private
+     * @access public
      * @return void
      */
-    function _free()
+    function free()
     {
         $vars = get_class_vars('XML_CSSML');
 

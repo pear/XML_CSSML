@@ -55,11 +55,11 @@ class XML_CSSML_xslt extends XML_CSSML {
     // }}}
     // {{{ constructor
 
-    function XML_CSSML_xslt($in_CSSML = null, $in_params = null)
+    function XML_CSSML_xslt($in_CSSML = null, $in_type = 'string', $in_params = null)
     {
         $this->loaded = false;
         if (!is_null($in_CSSML)) {
-            $this->load($in_CSSML);
+            $this->load($in_CSSML, $in_type);
         }
 
         if (!is_null($in_params)) {
@@ -97,8 +97,6 @@ class XML_CSSML_xslt extends XML_CSSML {
             $result = true; 
         }
         
-        parent::_free();
-
         return $result;
     }
 
@@ -106,16 +104,16 @@ class XML_CSSML_xslt extends XML_CSSML {
     // {{{ load()
 
     // I need some more error checking in here
-    function load($in_CSSML)
+    function load($in_CSSML, $in_type == 'string')
     {
         if (parent::isError($load = parent::load())) {
             return $load;
         }
 
-        if (file_exists($in_CSSML)) {
+        if ($in_type == 'file' && @file_exists($in_CSSML)) {
             $this->CSSMLDoc = $in_CSSML;
         }
-        elseif (is_string($in_CSSML)) {
+        elseif ($in_type == 'string' && is_string($in_CSSML)) {
             $this->CSSMLDoc = 'arg:/_xml';
             $this->arguments = array('/_xml' => $in_CSSML);
         }
