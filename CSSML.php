@@ -39,7 +39,7 @@ define('XML_CSSML_INVALID_FILE',      -6);
 // {{{ includes
 
 require_once 'PEAR.php';
-require_once 'CSSML/error.php';
+require_once 'XML/CSSML/Error.php';
 
 // }}}
 // {{{ functions
@@ -83,7 +83,7 @@ class XML_CSSML {
     var $stylesheetDoc;
 
     /**
-     * Redirection method for the output of the cssml (file, stout)
+     * Redirection method for the output of the cssml (file, stdout)
      * If redirection is a file, it must be absolute
      * @var string $outputMethod
      */

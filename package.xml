@@ -29,19 +29,27 @@
       This is the first stable release of the XML_CSSML package.  The hopes of this package are to erase the awkwardness of having to create many stylesheets for many pages and sections of a site, and having to infiltrate it with language constructions.  One can think of CSSML as being a template for CSS documents, in fact that is the best description it has been given so far. 
     </notes>
   </release>
+  <release>
+    <version>1.1</version>
+    <state>stable</state>
+    <date>2002-05-20</date>
+    <notes>
+      Restructuring the directory using Stig's suggestion for how to organize "Driver" sub-classes.
+    </notes>
+  </release>
   <filelist>
     <dir name="/" baseinstalldir="XML">
         <file role="php">CSSML.php</file>
         <dir name="CSSML">
-            <file role="php">error.php</file>
+            <file role="php">Error.php</file>
             <file role="php">libxslt.php</file>
-            <file role="ext">libxslt.xsl</file>
+            <file role="php">libxslt.xsl</file>
             <file role="php">xslt.php</file>
-            <file role="ext">xslt.xsl</file>
+            <file role="php">xslt.xsl</file>
         </dir>
         <dir name="docs">
-            <file role="data">CSSML.xml</file>
-            <file role="php">example.php</file>
+            <file role="php">CSSML.xml</file>
+            <file role="php">cssml_example.php</file>
         </dir>
     </dir>
   </filelist>
