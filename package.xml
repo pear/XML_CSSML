@@ -21,8 +21,8 @@
             <file role="php">error.php</file>
         </dir>
         <dir name="Container">
-            <file role="php">domxml.php</file>
-            <file role="xsl">domxml.xsl</file>
+            <file role="php">libxslt.php</file>
+            <file role="xsl">libxslt.xsl</file>
             <file role="php">xslt.php</file>
             <file role="xsl">xslt.xsl</file>
         </dir>

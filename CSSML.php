@@ -196,7 +196,7 @@ class XML_CSSML {
             $this->output = $in_params['output'];
             if ($in_params['output'] != 'STDOUT') {
                 // check to make sure this is a file...this needs work
-                if (!@file_exists($in_params['output']) && !touch($in_params['output'])) {
+                if (!@file_exists($in_params['output']) && !@touch($in_params['output'])) {
                     $this->output = 'STDOUT';
                     return PEAR::raiseError(null, XML_CSSML_INVALID_FILE, PEAR_ERROR_PRINT, E_USER_NOTICE, '', 'XML_CSSML_Error', true);
                 }
