@@ -30,7 +30,7 @@
     </notes>
   </release>
   <filelist>
-    <dir name="/" baseinstalldir="XML_CSSML">
+    <dir name="/" baseinstalldir="XML">
         <file role="php">CSSML.php</file>
         <dir name="CSSML">
             <file role="php">error.php</file>
