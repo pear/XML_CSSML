@@ -41,10 +41,10 @@
  */
 
 // }}}
-class XML_CSSML_domxml extends XML_CSSML {
+class XML_CSSML_libxslt extends XML_CSSML {
     // {{{ constructor
 
-    function XML_CSSML_domxml($in_CSSML = null, $in_type = 'string', $in_params = null)
+    function XML_CSSML_libxslt($in_CSSML = null, $in_type = 'string', $in_params = null)
     {
         $this->loaded = false;
         if (!is_null($in_CSSML)) {
@@ -55,7 +55,7 @@ class XML_CSSML_domxml extends XML_CSSML {
             $this->setParams($in_params);
         }
 
-        $this->stylesheetDoc = domxml_xslt_stylesheet_file(dirname(__FILE__) . '/domxml.xsl');
+        $this->stylesheetDoc = domxml_xslt_stylesheet_file(dirname(__FILE__) . '/libxslt.xsl');
     }
 
     // }}}
