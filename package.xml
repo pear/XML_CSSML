@@ -7,11 +7,13 @@
 
    My hope is that such a system becomes the standard for the organization of stylesheet information in the future.
   </description>
-  <maintainer>
-    <user>dallen</user>
-    <name>Daniel Allen</name>
-    <email>dallen@php.net</email>
-  </maintainer>
+  <maintainers>
+    <maintainer>
+      <user>dallen</user>
+      <name>Daniel Allen</name>
+      <email>dallen@php.net</email>
+    </maintainer>
+  </maintainers>
   <license>PHP License</license>
   <release>
     <version>0.1</version>
