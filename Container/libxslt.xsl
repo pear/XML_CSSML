@@ -13,7 +13,7 @@
   <!-- default parameters -->
   <xsl:param name="output">STDOUT</xsl:param>
   <xsl:param name="filter"></xsl:param>
-  <xsl:param name="browser">ie</xsl:param>
+  <xsl:param name="browser"></xsl:param>
   <xsl:param name="comment"></xsl:param>
 
   <xsl:template match="/">
