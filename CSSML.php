@@ -134,7 +134,7 @@ class XML_CSSML {
 
     function &factory($in_driver, $in_CSSML = null, $in_type = 'string', $in_params = null)
     {
-        $interface_path = 'Container/' . $in_driver . '.php';
+        $interface_path = 'CSSML/' . $in_driver . '.php';
         $interface_class = 'XML_CSSML_' . $in_driver;
         
         @include_once $interface_path;

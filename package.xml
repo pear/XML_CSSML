@@ -2,11 +2,17 @@
 <package>
   <name>XML_CSSML</name>
   <summary>The PEAR::XML_CSSML package provides methods for creating cascading style sheets (CSS) from an XML standard called CSSML.</summary>
+  <description>
+   The best way to describe this library is to classify it as a template system for generating cascading style sheets (CSS). It is ideal for storing all of the CSS in a single location and allowing it to be parsed as needed at runtime (or from cache) using both general and browser filters specified in the attribute for the style tags. It can be driven with either the libxslt pear extenstion (part of xmldom) or the xslt extension (part of the sablotron libraries).
+
+   My hope is that such a system becomes the standard for the organization of stylesheet information in the future.
+  </description>
   <maintainer>
     <user>dallen</user>
     <name>Daniel Allen</name>
     <email>dallen@php.net</email>
   </maintainer>
+  <license>PHP License</license>
   <release>
     <version>0.1</version>
     <state>beta</state>
@@ -28,15 +34,13 @@
         <file role="php">CSSML.php</file>
         <dir name="CSSML">
             <file role="php">error.php</file>
-        </dir>
-        <dir name="Container">
             <file role="php">libxslt.php</file>
-            <file role="xsl">libxslt.xsl</file>
+            <file role="ext">libxslt.xsl</file>
             <file role="php">xslt.php</file>
-            <file role="xsl">xslt.xsl</file>
+            <file role="ext">xslt.xsl</file>
         </dir>
         <dir name="docs">
-            <file role="xml">CSSML.xml</file>
+            <file role="data">CSSML.xml</file>
             <file role="php">example.php</file>
         </dir>
     </dir>
