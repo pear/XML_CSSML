@@ -104,7 +104,7 @@ class XML_CSSML_xslt extends XML_CSSML {
     // {{{ load()
 
     // I need some more error checking in here
-    function load($in_CSSML, $in_type == 'string')
+    function load($in_CSSML, $in_type = 'string')
     {
         if (parent::isError($load = parent::load())) {
             return $load;
