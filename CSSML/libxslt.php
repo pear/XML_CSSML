@@ -114,7 +114,7 @@ class XML_CSSML_libxslt extends XML_CSSML
             return PEAR::raiseError(null, XML_CSSML_INVALID_DATA, null, E_USER_WARNING, "Request data: $in_CSSML", 'XML_CSSML_Error', true);
         }
 
-        if (!is_a($this->CSSMLDoc), 'DomDocument')) {
+        if (!is_a($this->CSSMLDoc, 'DomDocument')) {
             return PEAR::raiseError(null, XML_CSSML_INVALID_DOCUMENT, null, E_USER_WARNING, "Request data: $in_CSSML", 'XML_CSSML_Error', true);
         }
 
