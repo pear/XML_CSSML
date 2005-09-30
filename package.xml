@@ -14,30 +14,15 @@
       <email>dallen@php.net</email>
     </maintainer>
   </maintainers>
-  <license>PHP License</license>
   <release>
-    <version>0.1</version>
-    <state>beta</state>
-    <date>2002-04-29</date>
-    <notes>
-      This is the initial independent release of the XML_CSSML package.  It includes support for both the domxml_xslt functions and the sablotron xslt extension.  The main file includes a factory function, which calls the relevant container object depending on the extension the user wishes to use.  It can either create an output css file or it can return the string.  It has support for browser specific styles using the codes of Net_UserAgent_Detect as well as a filter to extract only applicable styles.  There is an example file in the docs/ to better understand the usage.
-    </notes>
-  </release>
-  <release>
-    <version>1.0</version>
-    <state>stable</state>
-    <date>2002-05-20</date>
-    <notes>
-      This is the first stable release of the XML_CSSML package.  The hopes of this package are to erase the awkwardness of having to create many stylesheets for many pages and sections of a site, and having to infiltrate it with language constructions.  One can think of CSSML as being a template for CSS documents, in fact that is the best description it has been given so far. 
-    </notes>
-  </release>
-  <release>
-    <version>1.1</version>
-    <state>stable</state>
-    <date>2002-05-20</date>
-    <notes>
-      Restructuring the directory using Stig's suggestion for how to organize "Driver" sub-classes.
-    </notes>
+   <license>PHP License</license>
+   <version>1.1.1</version>
+   <state>stable</state>
+   <date>2005-?-?</date>
+   <notes>
+Fixed Bug #830 Assignment to $this
+Fixed Bug #902 PEAR QA: improvement for get_class()-usage
+   </notes>
   </release>
   <filelist>
     <dir name="/" baseinstalldir="XML">
@@ -55,4 +40,33 @@
         </dir>
     </dir>
   </filelist>
+  <changelog>
+   <release>
+    <license>PHP License</license>
+    <version>0.1</version>
+    <state>beta</state>
+    <date>2002-04-29</date>
+    <notes>
+     This is the initial independent release of the XML_CSSML package.  It includes support for both the domxml_xslt functions and the sablotron xslt extension.  The main file includes a factory function, which calls the relevant container object depending on the extension the user wishes to use.  It can either create an output css file or it can return the string.  It has support for browser specific styles using the codes of Net_UserAgent_Detect as well as a filter to extract only applicable styles.  There is an example file in the docs/ to better understand the usage.
+    </notes>
+   </release>
+   <release>
+    <license>PHP License</license>
+    <version>1.0</version>
+    <state>stable</state>
+    <date>2002-05-20</date>
+    <notes>
+     This is the first stable release of the XML_CSSML package.  The hopes of this package are to erase the awkwardness of having to create many stylesheets for many pages and sections of a site, and having to infiltrate it with language constructions.  One can think of CSSML as being a template for CSS documents, in fact that is the best description it has been given so far.
+    </notes>
+   </release>
+   <release>
+    <license>PHP License</license>
+    <version>1.1</version>
+    <state>stable</state>
+    <date>2002-05-20</date>
+    <notes>
+      Restructuring the directory using Stig's suggestion for how to organize "Driver" sub-classes.
+    </notes>
+  </release>
+  </changelog>
 </package>

@@ -44,10 +44,29 @@ require_once 'XML/CSSML/Error.php';
 // }}}
 // {{{ functions
 
+/**
+ * Replace function is_a()
+ *
+ * @category PHP
+ * @package  PHP_Compat
+ * @link     http://php.net/function.is_a
+ * @author   Aidan Lister <aidan@php.net>
+ * @version  $Revision$
+ * @since       PHP 4.2.0
+ * @require     PHP 4.0.0 (user_error) (is_subclass_of)
+ */
 if (!function_exists('is_a')) {
-    function is_a($in_data, $in_detect)
+    function is_a($object, $class)
     {
-        return (bool) (is_object($in_data) && (get_class($in_data) == strtolower($in_detect) || is_subclass_of($in_data, strtolower($in_detect))));
+        if (!is_object($object)) {
+           return false;
+        }
+
+        if (get_class($object) == strtolower($class)) {
+            return true;
+        } else {
+            return is_subclass_of($object, $class);
+        }
     }
 }
 
@@ -126,9 +145,14 @@ class XML_CSSML {
      */
     function XML_CSSML($in_driver, $in_CSSML = null, $in_type = 'string', $in_params = null)
     {
-        $this = $this->factory($in_driver, $in_CSSML, $in_type, $in_params);
+        if (version_compare(phpversion(), '5.0.0') == -1) {
+            $this = $this->factory($in_driver, $in_CSSML, $in_type, $in_params);
+        } else {
+            // error handling for PHP5
+            return PEAR::raiseError(null, XML_CSSML_ERROR, null, E_USER_WARNING, 'This does not work on PHP 5 anymore, use the factory method instead', 'XML_CSSML_Error', true);
+        }
     }
-        
+
     // }}}
     // {{{ factory()
 
@@ -136,10 +160,11 @@ class XML_CSSML {
     {
         $interface_path = 'CSSML/' . $in_driver . '.php';
         $interface_class = 'XML_CSSML_' . $in_driver;
-        
+
         @include_once $interface_path;
-        
-        return new $interface_class($in_CSSML, $in_type, $in_params);
+
+        $obj =& new $interface_class($in_CSSML, $in_type, $in_params);
+        return $obj;
     }
 
     // }}}
@@ -154,7 +179,7 @@ class XML_CSSML {
      *                         generating the CSS document
      *
      * @return void
-     * 
+     *
      */
     function load()
     {
@@ -162,13 +187,13 @@ class XML_CSSML {
             return PEAR::raiseError(null, XML_CSSML_ALREADY_EXISTS, null, E_USER_WARNING, $this->CSSMLDoc, 'XML_CSSML_Error', true);
         }
     }
-     
+
      // }}}
      // {{{ setParams()
 
     /**
      * Set the params (params) that will be used when calling the stylesheet parser.
-     * This pertains particularly to variables such as browser code, image path and 
+     * This pertains particularly to variables such as browser code, image path and
      * the filter.  It works by passing an associative array with any number of the
      * possible parameters for the stylesheet.  If a variable is not set, the default
      * will be used
@@ -176,12 +201,12 @@ class XML_CSSML {
      * @param array $in_params Associative array of the params
      *
      * @return void
-     * 
+     *
      */
     function setParams($in_params)
     {
         if (isset($in_params['browser'])) {
-            $this->browser = $in_params['browser']; 
+            $this->browser = $in_params['browser'];
         }
 
         if (isset($in_params['filter'])) {
@@ -216,7 +241,7 @@ class XML_CSSML {
      * @return css string if output method is STDOUT, else void
      * @access public
      */
-    function process() 
+    function process()
     {
         if (!$this->loaded) {
             return PEAR::raiseError(null, XML_CSSML_NOT_LOADED, null, E_USER_WARNING, 'use load() function', 'XML_CSSML_Error', true);
@@ -250,7 +275,7 @@ class XML_CSSML {
      * @access public
      * @return string error message, or false if not error code
      */
-    function errorMessage($in_value) 
+    function errorMessage($in_value)
     {
         // make the variable static so that it only has to do the defining on the first call
         static $errorMessages;
@@ -265,14 +290,14 @@ class XML_CSSML {
                 XML_CSSML_INVALID_DATA          => 'invalid cssml data to parse',
                 XML_CSSML_INVALID_DOCUMENT      => 'cssml domdocument could not be created',
                 XML_CSSML_INVALID_FILE          => 'output file does not exist',
-            );  
+            );
         }
 
         // If this is an error object, then grab the corresponding error code
         if (XML_CSSML::isError($in_value)) {
             $in_value = $in_value->getCode();
         }
-        
+
         // return the textual error message corresponding to the code
         return isset($errorMessages[$in_value]) ? $errorMessages[$in_value] : $errorMessages[XML_CSSML_ERROR];
     }
@@ -306,7 +331,7 @@ class XML_CSSML {
     {
         $vars = get_class_vars('XML_CSSML');
 
-        foreach($vars as $var => $value) {
+        foreach ($vars as $var => $value) {
             $this->$var = null;
         }
     }

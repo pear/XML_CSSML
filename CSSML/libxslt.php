@@ -30,8 +30,8 @@
 
 /**
  * The XML_CSSML_domxml is a container class which
- * provides the libxslt xsl functions to parse a CSSML 
- * document into a stylesheet with the ability to output 
+ * provides the libxslt xsl functions to parse a CSSML
+ * document into a stylesheet with the ability to output
  * to a file or return
  *
  * @author   Dan Allen <dan@mojavelinux.com>
@@ -41,7 +41,8 @@
  */
 
 // }}}
-class XML_CSSML_libxslt extends XML_CSSML {
+class XML_CSSML_libxslt extends XML_CSSML
+{
     // {{{ constructor
 
     function XML_CSSML_libxslt($in_CSSML = null, $in_type = 'string', $in_params = null)
@@ -83,7 +84,7 @@ class XML_CSSML_libxslt extends XML_CSSML {
             $resultData = $result->document_element();
             $output = $resultData->get_content();
         }
-        
+
         return isset($output) ? $output : true;
     }
 
@@ -113,7 +114,7 @@ class XML_CSSML_libxslt extends XML_CSSML {
             return PEAR::raiseError(null, XML_CSSML_INVALID_DATA, null, E_USER_WARNING, "Request data: $in_CSSML", 'XML_CSSML_Error', true);
         }
 
-        if (get_class($this->CSSMLDoc) != 'DomDocument') {
+        if (!is_a($this->CSSMLDoc), 'DomDocument')) {
             return PEAR::raiseError(null, XML_CSSML_INVALID_DOCUMENT, null, E_USER_WARNING, "Request data: $in_CSSML", 'XML_CSSML_Error', true);
         }
 

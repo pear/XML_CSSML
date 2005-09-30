@@ -30,8 +30,8 @@
 
 /**
  * The XML_CSSML_xslt is a container class which
- * provides the sablotron xsl functions to parse a CSSML 
- * document into a stylesheet with the ability to output 
+ * provides the sablotron xsl functions to parse a CSSML
+ * document into a stylesheet with the ability to output
  * to a file or return
  *
  * @author   Dan Allen <dan@mojavelinux.com>
@@ -41,7 +41,8 @@
  */
 
 // }}}
-class XML_CSSML_xslt extends XML_CSSML {
+class XML_CSSML_xslt extends XML_CSSML
+{
     // {{{ properties
 
     /**
@@ -94,9 +95,9 @@ class XML_CSSML_xslt extends XML_CSSML {
             $fp = fopen($this->output, 'w');
             fwrite($fp, $result);
             fclose($fp);
-            $result = true; 
+            $result = true;
         }
-        
+
         return $result;
     }
 
@@ -112,12 +113,10 @@ class XML_CSSML_xslt extends XML_CSSML {
 
         if ($in_type == 'file' && @file_exists($in_CSSML)) {
             $this->CSSMLDoc = $in_CSSML;
-        }
-        elseif ($in_type == 'string' && is_string($in_CSSML)) {
+        } elseif ($in_type == 'string' && is_string($in_CSSML)) {
             $this->CSSMLDoc = 'arg:/_xml';
             $this->arguments = array('/_xml' => $in_CSSML);
-        }
-        else {
+        } else {
             return PEAR::raiseError(null, XML_CSSML_INVALID_DATA, null, E_USER_WARNING, "Request data: $in_CSSML", 'XML_CSSML_Error', true);
         }
 
