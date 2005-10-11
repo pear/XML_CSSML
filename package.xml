@@ -18,10 +18,11 @@
    <license>PHP License</license>
    <version>1.1.1</version>
    <state>stable</state>
-   <date>2005-?-?</date>
+   <date>2005-12-31</date>
    <notes>
 Fixed Bug #830 Assignment to $this
 Fixed Bug #902 PEAR QA: improvement for get_class()-usage
+Corrected package.xml (toggg)
    </notes>
   </release>
   <filelist>
@@ -36,7 +37,7 @@ Fixed Bug #902 PEAR QA: improvement for get_class()-usage
         </dir>
         <dir name="docs">
             <file role="php">CSSML.xml</file>
-            <file role="php">cssml_example.php</file>
+            <file role="php">example.php</file>
         </dir>
     </dir>
   </filelist>
