@@ -145,12 +145,7 @@ class XML_CSSML {
      */
     function XML_CSSML($in_driver, $in_CSSML = null, $in_type = 'string', $in_params = null)
     {
-        if (version_compare(phpversion(), '5.0.0') == -1) {
-            $this = $this->factory($in_driver, $in_CSSML, $in_type, $in_params);
-        } else {
-            // error handling for PHP5
-            return PEAR::raiseError(null, XML_CSSML_ERROR, null, E_USER_WARNING, 'This does not work on PHP 5 anymore, use the factory method instead', 'XML_CSSML_Error', true);
-        }
+        $this = $this->factory($in_driver, $in_CSSML, $in_type, $in_params);
     }
 
     // }}}

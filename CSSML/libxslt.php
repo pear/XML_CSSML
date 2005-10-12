@@ -47,6 +47,11 @@ class XML_CSSML_libxslt extends XML_CSSML
 
     function XML_CSSML_libxslt($in_CSSML = null, $in_type = 'string', $in_params = null)
     {
+        if (!function_exists('domxml_version')) {
+            $this = PEAR::raiseError(null, XML_CSSML_ERROR, null, E_USER_ERROR,
+             'This driver needs the domxml extension to run', 'XML_CSSML_Error', true);
+            return;
+        }
         $this->loaded = false;
         if (!is_null($in_CSSML)) {
             $this->load($in_CSSML, $in_type);

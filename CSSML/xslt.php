@@ -58,6 +58,11 @@ class XML_CSSML_xslt extends XML_CSSML
 
     function XML_CSSML_xslt($in_CSSML = null, $in_type = 'string', $in_params = null)
     {
+        if (!function_exists('xslt_create')) {
+            $this = PEAR::raiseError(null, XML_CSSML_ERROR, null, E_USER_ERROR,
+             'This driver needs the xslt extension to run', 'XML_CSSML_Error', true);
+            return;
+        }
         $this->loaded = false;
         if (!is_null($in_CSSML)) {
             $this->load($in_CSSML, $in_type);

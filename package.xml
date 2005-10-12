@@ -18,11 +18,14 @@
    <license>PHP License</license>
    <version>1.1.1</version>
    <state>stable</state>
-   <date>2005-12-31</date>
+   <date>2005-10-12</date>
    <notes>
-Fixed Bug #830 Assignment to $this
+Fixed Bug #830 Assignment to $this, won't work in php5 so dependency added (toggg)
 Fixed Bug #902 PEAR QA: improvement for get_class()-usage
 Corrected package.xml (toggg)
+Created XML_CSSML/CSSML.php redirecting to the correct path (toggg)
+Check for extension existence at run-time (toggg)
+Refactored the example to give the right usage (toggg)
    </notes>
   </release>
   <filelist>
@@ -40,7 +43,17 @@ Corrected package.xml (toggg)
             <file role="php">example.php</file>
         </dir>
     </dir>
+    <dir name="/" baseinstalldir="/">
+        <dir name="XML_CSSML">
+        <file role="php">CSSML.php</file>
+        </dir>
+    </dir>
   </filelist>
+  
+  <deps>
+   <dep type="php" rel="lt" version="5.0.0" />
+  </deps>
+
   <changelog>
    <release>
     <license>PHP License</license>
