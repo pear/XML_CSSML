@@ -1,32 +1,34 @@
 <?php
-// {{{ license
+/**
+ * XML_CSSML
+ *
+ * PHP version 4.3.0
+ *
+ * Copyright (c) 1997-2003 The PHP Group
+ *
+ * This source file is subject to version 2.0 of the PHP license,
+ * that is bundled with this package in the file LICENSE, and is
+ * available at through the world-wide-web at
+ * http://www.php.net/license/2_02.txt.
+ * If you did not receive a copy of the PHP license and are unable to
+ * obtain it through the world-wide-web, please send a note to
+ * license@php.net so we can mail you a copy immediately.
+ *
+ * Authors:
+ *
+ * @category XML
+ * @package  XML_CSSML
+ * @author   Dan Allen <dan@mojavelinux.com>
+ * @license  PHP 2.02 http://www.php.net/license/2_02.txt
+ * @version  CVS: $Id$
+ * @link     http://pear.php.net/package/XML_CSSML
+ */
 
-// +----------------------------------------------------------------------+
-// | PHP version 4.0                                                      |
-// +----------------------------------------------------------------------+
-// | Copyright (c) 1997-2003 The PHP Group                                |
-// +----------------------------------------------------------------------+
-// | This source file is subject to version 2.0 of the PHP license,       |
-// | that is bundled with this package in the file LICENSE, and is        |
-// | available at through the world-wide-web at                           |
-// | http://www.php.net/license/2_02.txt.                                 |
-// | If you did not receive a copy of the PHP license and are unable to   |
-// | obtain it through the world-wide-web, please send a note to          |
-// | license@php.net so we can mail you a copy immediately.               |
-// +----------------------------------------------------------------------+
-// | Authors: Dan Allen <dan@mojavelinux.com>                             |
-// +----------------------------------------------------------------------+
-
-// $Id$
-
-// }}}
 // {{{ description
 
 // XML_CSSML is a CSSML to CSS xslt parser
 
 // }}}
-
-// {{{ class XML_CSSML_xslt
 
 /**
  * The XML_CSSML_xslt is a container class which
@@ -34,13 +36,12 @@
  * document into a stylesheet with the ability to output
  * to a file or return
  *
- * @author   Dan Allen <dan@mojavelinux.com>
- * @version  Revision: 0.1
- * @access   public
+ * @category XML
  * @package  XML_CSSML
+ * @author   Dan Allen <dan@mojavelinux.com>
+ * @license  PHP 2.02 http://www.php.net/license/2_02.txt
+ * @link     http://pear.php.net/package/XML_CSSML
  */
-
-// }}}
 class XML_CSSML_xslt extends XML_CSSML
 {
     // {{{ properties
@@ -56,7 +57,17 @@ class XML_CSSML_xslt extends XML_CSSML
     // }}}
     // {{{ constructor
 
-    function XML_CSSML_xslt($in_CSSML = null, $in_type = 'string', $in_params = null)
+    /**
+     * Class constructor, prepare the cssml document object from either a string, file or object
+     *
+     * @param mixed $in_cssml  Optionally the CSSML data can be passed to the constructor
+     * @param mixed $in_type   unknown
+     * @param mixed $in_params unknown
+     *
+     * @return void
+     * @access private
+     */
+    function XML_CSSML_xslt($in_cssml = null, $in_type = 'string', $in_params = null)
     {
         if (!function_exists('xslt_create')) {
             $this = PEAR::raiseError(null, XML_CSSML_ERROR, null, E_USER_ERROR,
@@ -64,8 +75,8 @@ class XML_CSSML_xslt extends XML_CSSML
             return;
         }
         $this->loaded = false;
-        if (!is_null($in_CSSML)) {
-            $this->load($in_CSSML, $in_type);
+        if (!is_null($in_cssml)) {
+            $this->load($in_cssml, $in_type);
         }
 
         if (!is_null($in_params)) {
@@ -78,7 +89,16 @@ class XML_CSSML_xslt extends XML_CSSML
     // }}}
     // {{{ process()
 
-    // I need some error checking in here
+    /**
+     * Run the transformation on the CSSML document using the CSSML xsl stylesheet.  If
+     * the output method is to a file, then the function will not return.  If the output
+     * is set to STDOUT, the xml string will be returned (really the css document) after
+     * some clean up of entities and domxml bugs have been fixed
+     *
+     * @return css string if output method is STDOUT, else void
+     * @access public
+     * @todo   I need some error checking in here
+     */
     function process()
     {
         if (parent::isError($process = parent::process())) {
@@ -109,7 +129,17 @@ class XML_CSSML_xslt extends XML_CSSML
     // }}}
     // {{{ load()
 
-    // I need some more error checking in here
+    /**
+     * Prepare the CSSML document object from either a string, file or object.  This
+     * will set the CSSMLDoc class variable which will be parsed by the xsl stylesheet
+     * into a CSS stylesheet
+     *
+     * @param mixed  $in_CSSML unknown
+     * @param string $in_type  unknown
+     *
+     * @return void
+     * @todo  I need some more error checking in here
+     */
     function load($in_CSSML, $in_type = 'string')
     {
         if (parent::isError($load = parent::load())) {
@@ -119,7 +149,7 @@ class XML_CSSML_xslt extends XML_CSSML
         if ($in_type == 'file' && @file_exists($in_CSSML)) {
             $this->CSSMLDoc = $in_CSSML;
         } elseif ($in_type == 'string' && is_string($in_CSSML)) {
-            $this->CSSMLDoc = 'arg:/_xml';
+            $this->CSSMLDoc  = 'arg:/_xml';
             $this->arguments = array('/_xml' => $in_CSSML);
         } else {
             return PEAR::raiseError(null, XML_CSSML_INVALID_DATA, null, E_USER_WARNING, "Request data: $in_CSSML", 'XML_CSSML_Error', true);
