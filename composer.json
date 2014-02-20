@@ -1,0 +1,25 @@
+{
+    "authors": [
+        {
+            "email": "dallen@php.net",
+            "name": "Daniel Allen",
+            "role": "Lead"
+        }
+    ],
+    "autoload": {
+        "classmap": [
+            "./"
+        ]
+    },
+    "description": "More info available on: http://pear.php.net/package/XML_CSSML",
+    "license": "PHP License",
+    "name": "pear/xml_cssml",
+    "support": {
+        "issues": "http:///bugs/search.php?cmd=display&package_name[]=XML_CSSML",
+        "source": "https://github.com/pear/XML_CSSML"
+    },
+    "type": "library",
+    "require-dev": {
+        "phpunit/phpunit": "*"
+    }
+}
